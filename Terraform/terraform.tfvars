@@ -1,0 +1,2 @@
+linode_token = "ADD HERE YOUR LINDOE TOKEN"
+root_pass    = "ADD HERE YOUR LINODE PASSWORD"

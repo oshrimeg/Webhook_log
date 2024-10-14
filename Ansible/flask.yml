@@ -1,0 +1,6 @@
+---
+- name: Provision Flask Application
+  hosts: AppHost
+  become: yes
+  roles:
+    - flask_app

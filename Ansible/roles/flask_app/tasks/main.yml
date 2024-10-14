@@ -1,0 +1,24 @@
+  - name: install virtual environment
+    package:
+      name: 
+        - python3-venv
+        - git
+      state: present
+      update_cache: yes
+
+  - name: create virtual environment
+    command: python3 -m venv /opt/simpleFlask/venv
+
+  - name: install requirements
+    pip:
+      requirements: /flask_project/Python-Webhook-App/requirements.txt
+      virtualenv: /flask_project/Python-Webhook-App/venv
+  
+  - name: stop any process running on port 5000
+    shell: fuser -k 5000/tcp || true
+    ignore_errors: yes
+
+  - name: run flask app
+    shell: |
+      . /opt/simpleFlask/venv/bin/activate
+      nohup python3 /opt/flask_project/Python-Webhook-App/app.py > /opt/flask_project/Python-Webhook-App/app.log 2>&1 &
